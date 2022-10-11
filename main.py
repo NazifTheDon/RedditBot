@@ -1,6 +1,9 @@
 import requests
 import pandas as pd
+from datetime import date
 from requests.auth import HTTPBasicAuth
+from send_mail import send_email
+
 
 CLIENT_ID = '_WuqZxzKBaOX7_5_PjP91g'
 SECRET_KEY = 'fUZByulvvO1zKHihOUfGxpQs1GEreg'
@@ -28,16 +31,22 @@ def getInfo(link, df):
                  headers=headers, params={"limit": "100"})
     for post in res.json()["data"]["children"]:
         dataOf = post["data"]
-        df = df.append({
-            "title" : dataOf["title"],
-            "subbreddit" : dataOf["subreddit"],
-            "author": dataOf["author"],
-            "Content": (dataOf["selftext"] if(dataOf["selftext"]) else "No Description"),
-            }, ignore_index = True)
-    #print(post["data"].keys())
+        descriptionLower = dataOf["selftext"].lower()
+        if(" tesla " in descriptionLower):
+            df = df.append({
+                "Title" : dataOf["title"],
+                "Abbreddit" : dataOf["subreddit"],
+                "Author": dataOf["author"],
+                "Content": (dataOf["selftext"] if(dataOf["selftext"]) else "No Description"),
+                "Link": dataOf["url"]
+                }, ignore_index = True)
     df = df.to_csv("test.csv", index=False, sep=";")
     return df
 
-print(getInfo("/r/python/new", df))
+
+todays_date = "\033[1m" + date.today().strftime("%d/%m/%Y") + "\033[0m"
+
+
+send_email(f"Update on reddit", f"\nGoodmorning Nazif!\nHere is the daily update.\nTodays date is: {todays_date} \n\n- From CertifiedSideBoi (Reddit)")
 
 
