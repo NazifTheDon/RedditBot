@@ -5,11 +5,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
 
-def send_email(subject, body):
+def send_email(subject, body, file):
     sender_email = "testadennaaccen@gmail.com"
-    receiver_email = "testadennaaccen@gmail.com"
-
-
+    receiver_email = "nazif.kadiroglu1@gmail.com"
 
     content = f"""
         {body}
@@ -23,7 +21,7 @@ def send_email(subject, body):
     body = MIMEText(content, "plain")
     msg.attach(body)
 
-    filename = "test.csv"
+    filename = file
     with open(filename, "r", encoding="utf8") as f:
         attachment = MIMEApplication(f.read(), Name=basename(filename))
         attachment["Content-Dispositiob"] = 'attachment; filename="{}"'.format(basename(filename))
