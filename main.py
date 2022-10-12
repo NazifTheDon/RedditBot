@@ -24,29 +24,35 @@ res = requests.post("https://www.reddit.com/api/v1/access_token",
 TOKEN = res.json()['access_token']
 headers["Authorization"] = f'bearer {TOKEN}'
 
-df = pd.DataFrame()
+
+def main():
+    df = pd.DataFrame()
+    todays_date = date.today().strftime("%d/%m/%Y")
+    getInfo("r/wallstreetbets/new", df)
+    send_email("Update on reddit", f"\nGoodmorning Nazif!\nHere is the daily update.\nTodays date is: {todays_date} \n\n- From CertifiedSideBoi (Reddit)", "info.csv")
+
 
 def getInfo(link, df):
     res = requests.get(f"https://oauth.reddit.com/{link}",
                  headers=headers, params={"limit": "100"})
     for post in res.json()["data"]["children"]:
-        dataOf = post["data"]
-        descriptionLower = dataOf["selftext"].lower()
-        if(" tesla " in descriptionLower):
+        data_of = post["data"]
+        description_lower = data_of["selftext"].lower()
+        title_lower = data_of["title"].lower()
+        if(" tesla " in description_lower or " tesla " in title_lower or ("tesla ") in title_lower ):
             df = df.append({
-                "Title" : dataOf["title"],
-                "Abbreddit" : dataOf["subreddit"],
-                "Author": dataOf["author"],
-                "Content": (dataOf["selftext"] if(dataOf["selftext"]) else "No Description"),
-                "Link": dataOf["url"]
+                "Title" : data_of["title"],
+                "Abbreddit" : data_of["subreddit"],
+                "Author": data_of["author"],
+                "Content": (data_of["selftext"] if(data_of["selftext"]) else "No Description"),
+                "Link": data_of["url"]
                 }, ignore_index = True)
-    df = df.to_csv("test.csv", index=False, sep=";")
+    df = df.to_csv("info.csv", index=False, sep=";")
     return df
 
 
-todays_date = "\033[1m" + date.today().strftime("%d/%m/%Y") + "\033[0m"
+if __name__ == '__main__':
+    main()
 
-
-send_email(f"Update on reddit", f"\nGoodmorning Nazif!\nHere is the daily update.\nTodays date is: {todays_date} \n\n- From CertifiedSideBoi (Reddit)")
 
 
