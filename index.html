@@ -1,0 +1,24 @@
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+Wassup
+<form action="#" method="POST">
+    <input type="email" name="email" placeholder="Enter Email">
+    <input type="submit" value="submit">
+
+</form>
+<br/><br/>
+
+{% for our_user in our_users %}
+<h4>
+    {{our_user}} <br/>
+</h4>
+{% endfor %}
+
+</body>
+</html>
+{% endblock %}

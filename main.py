@@ -1,9 +1,8 @@
 import requests
 import pandas as pd
-from datetime import date
+from datetime import date, datetime
 from requests.auth import HTTPBasicAuth
 from send_mail import send_email
-
 
 CLIENT_ID = '_WuqZxzKBaOX7_5_PjP91g'
 SECRET_KEY = 'fUZByulvvO1zKHihOUfGxpQs1GEreg'
