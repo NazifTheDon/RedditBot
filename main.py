@@ -26,9 +26,9 @@ headers["Authorization"] = f'bearer {TOKEN}'
 
 def main():
     df = pd.DataFrame()
-    todays_date = date.today().strftime("%d/%m/%Y")
+    #todays_date = date.today().strftime("%d/%m/%Y")
     getInfo("r/wallstreetbets/new", df)
-    send_email("Update on reddit", f"\nGoodmorning Nazif!\nHere is the daily update.\nTodays date is: {todays_date} \n\n- From CertifiedSideBoi (Reddit)", "info.csv")
+    #send_email("Update on reddit", f"\nGoodmorning Nazif!\nHere is the daily update.\nTodays date is: {todays_date} \n\n- From CertifiedSideBoi (Reddit)", "info.csv")
 
 
 def getInfo(link, df):

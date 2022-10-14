@@ -5,9 +5,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
 
-def send_email(subject, body, file):
+def send_email(subject, body, file, receiver_email):
     sender_email = "testadennaaccen@gmail.com"
-    receiver_email = "nazif.kadiroglu1@gmail.com"
+    receiver = receiver_email
 
     content = f"""
         {body}
@@ -16,7 +16,7 @@ def send_email(subject, body, file):
 
 
     msg["From"] = sender_email
-    msg["To"] = receiver_email
+    msg["To"] = receiver
     msg["Subject"] = subject
     body = MIMEText(content, "plain")
     msg.attach(body)
@@ -31,4 +31,4 @@ def send_email(subject, body, file):
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(sender_email, "etafpuxedtlpknug")
-        server.send_message(msg, from_addr=sender_email, to_addrs=[receiver_email])
+        server.send_message(msg, from_addr=sender_email, to_addrs=[receiver])
