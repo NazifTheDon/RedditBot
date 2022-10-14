@@ -1,9 +1,8 @@
 import requests
 import pandas as pd
-from datetime import date
+from datetime import date, datetime
 from requests.auth import HTTPBasicAuth
 from send_mail import send_email
-
 
 CLIENT_ID = '_WuqZxzKBaOX7_5_PjP91g'
 SECRET_KEY = 'fUZByulvvO1zKHihOUfGxpQs1GEreg'
@@ -27,9 +26,9 @@ headers["Authorization"] = f'bearer {TOKEN}'
 
 def main():
     df = pd.DataFrame()
-    todays_date = date.today().strftime("%d/%m/%Y")
+    #todays_date = date.today().strftime("%d/%m/%Y")
     getInfo("r/wallstreetbets/new", df)
-    send_email("Update on reddit", f"\nGoodmorning Nazif!\nHere is the daily update.\nTodays date is: {todays_date} \n\n- From CertifiedSideBoi (Reddit)", "info.csv")
+    #send_email("Update on reddit", f"\nGoodmorning Nazif!\nHere is the daily update.\nTodays date is: {todays_date} \n\n- From CertifiedSideBoi (Reddit)", "info.csv")
 
 
 def getInfo(link, df):
