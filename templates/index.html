@@ -1,0 +1,12 @@
+<form action="http://localhost:5000/submit" method="post">
+  <label for="email">Subscribe:</label><br>
+  <input type="text" id="email" placeholder="Email..." name="email"><br>
+  <input type="submit" value="Submit">
+</form>
+<button id="go-button">Submit now</button>
+
+<script>
+  document.getElementById("go-button").addEventListener("click", function() {
+    location.href = 'base.html';
+  });
+</script>

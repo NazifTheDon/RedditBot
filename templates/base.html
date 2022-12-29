@@ -1,0 +1,12 @@
+<form action="http://127.0.0.1:5000/submit_now" method="post">
+  <label for="email">Email:</label><br>
+  <input type="text" id="email" name="email"><br>
+  <input type="submit" value="Send email now!">
+</form>
+<button id="go-back">Subscribe</button>
+
+<script>
+  document.getElementById("go-back").addEventListener("click", function() {
+    location.href = 'index.html';
+  });
+</script>

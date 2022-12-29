@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
 
-def send_email(subject, body, file, receiver_email):
+def send_email(subject, body, file, receiver_email, attachments=None):
     sender_email = "testadennaaccen@gmail.com"
     receiver = receiver_email
 
