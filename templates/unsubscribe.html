@@ -1,0 +1,12 @@
+<form action="/unsubscribe" method="post">
+  <label for="email">Unsubscribe:</label><br>
+  <input type="text" id="email" placeholder="Email..." name="email"><br>
+  <input type="submit" value="Unsubscribe">
+</form>
+<button id="go-button">Submit now</button>
+
+<script>
+  document.getElementById("go-button").addEventListener("click", function() {
+    location.href = '/';
+  });
+</script>

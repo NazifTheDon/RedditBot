@@ -1,2 +1,8 @@
 config.py
 venv
+*.pyc
+__pycache__/
+venv/
+.env
+.vscode/
+token.json
